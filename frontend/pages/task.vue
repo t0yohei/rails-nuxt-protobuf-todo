@@ -23,12 +23,12 @@ export default Vue.extend({
     }
   },
 
-  created() {
+  created(): void {
     this.tasks = this.fetchTasks()
   },
 
   methods: {
-    fetchTasks() {
+    fetchTasks(): { id: number; title: string }[] {
       return [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }]
     }
   }
