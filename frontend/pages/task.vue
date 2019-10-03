@@ -1,11 +1,46 @@
 <template>
-  <div class="container">task</div>
+  <div>
+    <table class="simple-table">
+      <tr>
+        <th>id</th>
+        <th>title</th>
+      </tr>
+      <tr v-for="task in tasks" :key="task.id">
+        <td>{{ task.id }}</td>
+        <td>{{ task.title }}</td>
+      </tr>
+    </table>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({})
+export default Vue.extend({
+  data() {
+    return {
+      tasks: [{ id: 0, title: '' }]
+    }
+  },
+
+  created() {
+    this.tasks = this.fetchTasks()
+  },
+
+  methods: {
+    fetchTasks() {
+      return [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }]
+    }
+  }
+})
 </script>
 
-<style scoped></style>>
+<style scoped>
+.simple-table {
+  border: 1px solid gray;
+}
+.simple-table th,
+.simple-table td {
+  border: 1px solid gray;
+}
+</style>
