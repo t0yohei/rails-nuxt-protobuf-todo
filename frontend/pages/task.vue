@@ -10,6 +10,8 @@
         <td>{{ task.title }}</td>
       </tr>
     </table>
+
+    {{ ip }}
   </div>
 </template>
 
@@ -19,7 +21,8 @@ import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
-      tasks: [{ id: 0, title: '' }]
+      tasks: [{ id: 0, title: '' }],
+      ip: ''
     }
   },
 
@@ -30,6 +33,10 @@ export default Vue.extend({
   methods: {
     fetchTasks(): { id: number; title: string }[] {
       return [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }]
+    },
+    async fetchSomething() {
+      const ip = await this.$axios.$get('http://icanhazip.com')
+      this.ip = ip
     }
   }
 })
