@@ -27,16 +27,13 @@ export default Vue.extend({
   },
 
   created(): void {
-    this.tasks = this.fetchTasks()
+    this.fetchTasks()
   },
 
   methods: {
-    fetchTasks(): { id: number; title: string }[] {
-      return [{ id: 1, title: 'test1' }, { id: 2, title: 'test2' }]
-    },
-    async fetchSomething() {
-      const ip = await this.$axios.$get('http://icanhazip.com')
-      this.ip = ip
+    async fetchTasks() {
+      const tasks = await this.$axios.$get('tasks')
+      this.tasks = tasks
     }
   }
 })
