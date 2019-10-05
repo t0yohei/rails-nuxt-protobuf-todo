@@ -10,8 +10,6 @@
         <td>{{ task.title }}</td>
       </tr>
     </table>
-
-    {{ ip }}
   </div>
 </template>
 
@@ -21,8 +19,7 @@ import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
-      tasks: [{ id: 0, title: '' }],
-      ip: ''
+      tasks: [{ id: 0, title: '' }]
     }
   },
 
