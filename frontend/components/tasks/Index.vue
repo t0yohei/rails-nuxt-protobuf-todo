@@ -1,22 +1,18 @@
 <template>
   <div>
-    <table class="simple-table">
-      <tr>
-        <th>id</th>
-        <th>title</th>
-      </tr>
-      <tr v-for="task in tasks" :key="task.id">
-        <td>{{ task.id }}</td>
-        <td>{{ task.title }}</td>
-      </tr>
-    </table>
+    <edit-tasks-form :tasks="tasks"></edit-tasks-form>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import EditTasksForm from './EditTasksForm.vue'
 
 export default Vue.extend({
+  components: {
+    EditTasksForm
+  },
+
   data() {
     return {
       tasks: [{ id: 0, title: '' }]
@@ -36,12 +32,4 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
-.simple-table {
-  border: 1px solid gray;
-}
-.simple-table th,
-.simple-table td {
-  border: 1px solid gray;
-}
-</style>
+<style scoped></style>
