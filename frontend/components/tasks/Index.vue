@@ -1,6 +1,12 @@
 <template>
   <div>
     <edit-tasks-form :tasks="tasks"></edit-tasks-form>
+    <input
+      v-model="newTaskTitle"
+      placeholder="新規タスク"
+      class="newTaskTitleInput"
+    />
+    <button @click="addTask()">追加</button>
   </div>
 </template>
 
@@ -15,7 +21,8 @@ export default Vue.extend({
 
   data() {
     return {
-      tasks: [{ id: 0, title: '' }]
+      tasks: [{ id: 0, title: '' }],
+      newTaskTitle: ''
     }
   },
 
@@ -27,9 +34,24 @@ export default Vue.extend({
     async fetchTasks() {
       const tasks = await this.$axios.$get('tasks')
       this.tasks = tasks
+    },
+    async addTask() {
+      if (this.newTaskTitle === '') {
+        return
+      }
+      await this.$axios.$post('tasks', {
+        title: this.newTaskTitle
+      })
+      this.newTaskTitle = ''
+      this.fetchTasks()
     }
   }
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.newTaskTitleInput {
+  margin: 10px;
+  padding: 10px;
+}
+</style>

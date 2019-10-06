@@ -53,9 +53,9 @@ export default {
     proxy: true
   },
   /*
-  ** Proxy module configuration
-  ** See https://github.com/nuxt-community/proxy-module
-  */
+   ** Proxy module configuration
+   ** See https://github.com/nuxt-community/proxy-module
+   */
   proxy: {
     '/api': {
       target: 'http://localhost:3000'
