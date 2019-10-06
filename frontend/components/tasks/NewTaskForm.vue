@@ -20,7 +20,7 @@ export default Vue.extend({
   },
 
   methods: {
-    addTask() {
+    addTask(): void {
       if (this.newTaskTitle === '') {
         return
       }

@@ -30,17 +30,17 @@ export default Vue.extend({
   },
 
   methods: {
-    async fetchTasks() {
+    async fetchTasks(): Promise<void> {
       const tasks = await this.$axios.$get('tasks')
       this.tasks = tasks
     },
-    async addTask(newTaskTitle: string) {
+    async addTask(newTaskTitle: string): Promise<void> {
       await this.$axios.$post('tasks', {
         title: newTaskTitle
       })
       this.fetchTasks()
     },
-    async deleteTask(targetTaskId: string) {
+    async deleteTask(targetTaskId: string): Promise<void> {
       await this.$axios.$delete(`tasks/${targetTaskId}`)
       this.fetchTasks()
     }
