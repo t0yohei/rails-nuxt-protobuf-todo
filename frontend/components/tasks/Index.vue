@@ -1,6 +1,9 @@
 <template>
   <div>
-    <edit-tasks-form :tasks="tasks"></edit-tasks-form>
+    <edit-tasks-form
+      :tasks="tasks"
+      @delete-task-clicked="deleteTask"
+    ></edit-tasks-form>
     <new-task-form @add-task-clicked="addTask"></new-task-form>
   </div>
 </template>
@@ -35,6 +38,10 @@ export default Vue.extend({
       await this.$axios.$post('tasks', {
         title: newTaskTitle
       })
+      this.fetchTasks()
+    },
+    async deleteTask(targetTaskId: string) {
+      await this.$axios.$delete(`tasks/${targetTaskId}`)
       this.fetchTasks()
     }
   }
