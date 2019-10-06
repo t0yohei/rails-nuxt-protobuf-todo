@@ -7,7 +7,7 @@
       </tr>
       <tr v-for="task in tasks" :key="task.id">
         <td>{{ task.id }}</td>
-        <td>{{ task.title }}</td>
+        <td class="task-title">{{ task.title }}</td>
       </tr>
     </table>
   </div>
@@ -29,9 +29,13 @@ export default Vue.extend({
 <style scoped>
 .simple-table {
   border: 1px solid gray;
+  margin: 10px;
 }
 .simple-table th,
 .simple-table td {
   border: 1px solid gray;
+}
+.task-title {
+  width: 200px;
 }
 </style>
