@@ -5,3 +5,7 @@ message Task {
     int32 id = 1;
     string title = 2;
 }
+
+message Tasks {
+    Task task = 1;
+}

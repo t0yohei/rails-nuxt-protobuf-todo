@@ -10,9 +10,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :id, :int32, 1
       optional :title, :string, 2
     end
+    add_message "Tasks" do
+      optional :task, :message, 1, "Task"
+    end
   end
 end
 
 module Protos
   Task = Google::Protobuf::DescriptorPool.generated_pool.lookup("Task").msgclass
+  Tasks = Google::Protobuf::DescriptorPool.generated_pool.lookup("Tasks").msgclass
 end
