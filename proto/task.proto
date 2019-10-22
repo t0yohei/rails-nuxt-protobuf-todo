@@ -1,4 +1,5 @@
 syntax = "proto3";
+option ruby_package = "Protos::";
 
 message Task {
     int32 id = 1;
