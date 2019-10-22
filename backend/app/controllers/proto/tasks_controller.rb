@@ -3,8 +3,8 @@ class Proto::TasksController < ApplicationController
   def index
     tasks = Task.all
     task_proto = ::Protos::Task.new(id: tasks.first.id, title: tasks.first.title)
-    task_proto_json = Protos::Task.encode_json(task_proto)
-    render json: task_proto_json, status: :ok
+    task_proto_encoded_data = Protos::Task.encode(task_proto)
+    render body: task_proto_encoded_data, status: :ok
   end
 
   # def show
