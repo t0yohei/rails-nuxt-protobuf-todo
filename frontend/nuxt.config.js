@@ -49,7 +49,6 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    prefix: '/api',
     proxy: true
   },
   /*
