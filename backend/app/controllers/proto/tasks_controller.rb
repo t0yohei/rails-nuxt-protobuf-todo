@@ -4,7 +4,7 @@ class Proto::TasksController < ApplicationController
     tasks = Task.all
     task_proto = ::Protos::Task.new(id: tasks.first.id, title: tasks.first.title)
     task_proto_encoded_data = Protos::Task.encode(task_proto)
-    render body: task_proto_encoded_data, status: :ok
+    render plain: task_proto_encoded_data, status: :ok
   end
 
   # def show
