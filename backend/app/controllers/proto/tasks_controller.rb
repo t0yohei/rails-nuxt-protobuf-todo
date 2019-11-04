@@ -2,9 +2,13 @@
 class Proto::TasksController < ApplicationController
   def index
     tasks = Task.all
-    task_proto = ::Protos::Task.new(id: tasks.first.id, title: tasks.first.title)
-    task_proto_encoded_data = Protos::Task.encode(task_proto)
-    render plain: task_proto_encoded_data, status: :ok
+    tasks_proto = ::Protos::Tasks.new
+    tasks.each do |each_task|
+      task_proto = ::Protos::Task.new(id: each_task.id, title: each_task.title)
+      tasks_proto.task.push(task_proto)
+    end
+    tasks_proto_encoded_data = Protos::Tasks.encode(tasks_proto)
+    render plain: tasks_proto_encoded_data, status: :ok
   end
 
   # def show
