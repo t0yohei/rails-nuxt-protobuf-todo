@@ -31,7 +31,7 @@ export default Vue.extend({
   },
 
   methods: {
-    async fetchTasks() {
+    async fetchTasks(): Promise<void> {
       const res = await this.$axios.$get('proto/tasks', {
         responseType: 'arraybuffer'
       })
