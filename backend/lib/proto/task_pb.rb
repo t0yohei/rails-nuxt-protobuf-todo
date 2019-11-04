@@ -12,10 +12,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "Tasks" do
       repeated :task, :message, 1, "Task"
     end
+    add_message "CreateTask" do
+      optional :title, :string, 1
+    end
   end
 end
 
 module Protos
   Task = Google::Protobuf::DescriptorPool.generated_pool.lookup("Task").msgclass
   Tasks = Google::Protobuf::DescriptorPool.generated_pool.lookup("Tasks").msgclass
+  CreateTask = Google::Protobuf::DescriptorPool.generated_pool.lookup("CreateTask").msgclass
 end
