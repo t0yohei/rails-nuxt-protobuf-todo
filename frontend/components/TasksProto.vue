@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Tasks } from '../plugins/proto/task_pb'
+import { Tasks, CreateTask } from '../plugins/proto/task_pb'
 import EditTasksForm from './tasks/EditTasksForm.vue'
 import NewTaskForm from './tasks/NewTaskForm.vue'
 
@@ -45,9 +45,10 @@ export default Vue.extend({
       this.tasks = tasks
     },
     async addTask(newTaskTitle: string): Promise<void> {
-      await this.$axios.$post('proto/tasks', {
-        title: newTaskTitle
-      })
+      const createTaskReqest = new CreateTask()
+      createTaskReqest.setTitle(newTaskTitle)
+      const createTaskReqestEncoded = createTaskReqest.serializeBinary()
+      await this.$axios.$post('proto/tasks', createTaskReqestEncoded)
       this.fetchTasks()
     },
     async deleteTask(targetTaskId: string): Promise<void> {

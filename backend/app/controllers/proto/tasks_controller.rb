@@ -16,10 +16,11 @@ class Proto::TasksController < ApplicationController
   #   render json: task, status: :ok
   # end
 
-  # def create
-  #   task = Task.create(task_params)
-  #   render json: task, status: :created
-  # end
+  def create
+    decoded_data = Protos::CreateTask.decode(request.raw_post)
+    Task.create(title: decoded_data.title)
+    render status: :created
+  end
 
   # def update
   #   task = Task.find(params[:id])
