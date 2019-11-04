@@ -1,27 +1,23 @@
 <template>
   <div>
-    <tr v-for="task in tasks.getTaskList()" :key="task.getId()">
-      <td>{{ task.getId() }}</td>
-      <td>{{ task.getTitle() }}</td>
-    </tr>
-    <!-- <edit-tasks-form
-      :tasks="tasks"
+    <edit-tasks-form
+      :tasks="tasks.toObject().taskList"
       @delete-task-clicked="deleteTask"
     ></edit-tasks-form>
-    <new-task-form @add-task-clicked="addTask"></new-task-form> -->
+    <new-task-form @add-task-clicked="addTask"></new-task-form>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Tasks } from '../plugins/proto/task_pb'
-// import EditTasksForm from './tasks/EditTasksForm.vue'
-// import NewTaskForm from './tasks/NewTaskForm.vue'
+import EditTasksForm from './tasks/EditTasksForm.vue'
+import NewTaskForm from './tasks/NewTaskForm.vue'
 
 export default Vue.extend({
   components: {
-    // EditTasksForm,
-    // NewTaskForm
+    EditTasksForm,
+    NewTaskForm
   },
 
   data() {
