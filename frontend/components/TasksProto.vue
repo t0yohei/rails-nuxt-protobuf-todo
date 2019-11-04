@@ -26,15 +26,21 @@ export default Vue.extend({
     }
   },
 
+  computed: {
+    protoAxiosConfig(): Object {
+      return {
+        responseType: 'arraybuffer'
+      }
+    }
+  },
+
   created(): void {
     this.fetchTasks()
   },
 
   methods: {
     async fetchTasks(): Promise<void> {
-      const res = await this.$axios.$get('proto/tasks', {
-        responseType: 'arraybuffer'
-      })
+      const res = await this.$axios.$get('proto/tasks', this.protoAxiosConfig)
       const tasks = Tasks.deserializeBinary(res)
       this.tasks = tasks
     },
