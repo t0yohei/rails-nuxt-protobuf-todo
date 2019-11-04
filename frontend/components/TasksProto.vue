@@ -1,7 +1,9 @@
 <template>
   <div>
-    {{ tasks.getId() }}
-    {{ tasks.getTitle() }}
+    <tr v-for="task in tasks.getTaskList()" :key="task.getId()">
+      <td>{{ task.getId() }}</td>
+      <td>{{ task.getTitle() }}</td>
+    </tr>
     <!-- <edit-tasks-form
       :tasks="tasks"
       @delete-task-clicked="deleteTask"
@@ -12,7 +14,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Task } from '../plugins/proto/task_pb'
+import { Tasks } from '../plugins/proto/task_pb'
 // import EditTasksForm from './tasks/EditTasksForm.vue'
 // import NewTaskForm from './tasks/NewTaskForm.vue'
 
@@ -24,7 +26,7 @@ export default Vue.extend({
 
   data() {
     return {
-      tasks: new Task()
+      tasks: new Tasks()
     }
   },
 
@@ -37,8 +39,8 @@ export default Vue.extend({
       const res = await this.$axios.$get('proto/tasks', {
         responseType: 'arraybuffer'
       })
-      const task = Task.deserializeBinary(res)
-      this.tasks = task
+      const tasks = Tasks.deserializeBinary(res)
+      this.tasks = tasks
     },
     async addTask(newTaskTitle: string): Promise<void> {
       await this.$axios.$post('proto/tasks', {
