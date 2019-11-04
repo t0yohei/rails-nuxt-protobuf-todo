@@ -1,11 +1,20 @@
 syntax = "proto3";
 option ruby_package = "Protos::";
 
+/*
+command:
+protoc --plugin=protoc-gen-ts=./frontend/node_modules/.bin/protoc-gen-ts \
+--ruby_out=./backend/lib \
+--js_out=import_style=commonjs,binary:./frontend/plugins \
+--ts_out=./frontend/plugins proto/task.proto
+*/
+
+
 message Task {
     int32 id = 1;
     string title = 2;
 }
 
 message Tasks {
-    Task task = 1;
+    repeated Task task = 1;
 }

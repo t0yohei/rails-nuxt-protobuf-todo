@@ -1,6 +1,5 @@
-// package:
+// package: 
 // file: proto/task.proto
-// command: protoc --plugin=protoc-gen-ts=./frontend/node_modules/.bin/protoc-gen-ts --js_out=import_style=commonjs,binary:./frontend/plugins --ts_out=./frontend/plugins proto/task.proto
 
 import * as jspb from "google-protobuf";
 
@@ -29,10 +28,10 @@ export namespace Task {
 }
 
 export class Tasks extends jspb.Message {
-  hasTask(): boolean;
-  clearTask(): void;
-  getTask(): Task | undefined;
-  setTask(value?: Task): void;
+  clearTaskList(): void;
+  getTaskList(): Array<Task>;
+  setTaskList(value: Array<Task>): void;
+  addTask(value?: Task, index?: number): Task;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Tasks.AsObject;
@@ -46,6 +45,7 @@ export class Tasks extends jspb.Message {
 
 export namespace Tasks {
   export type AsObject = {
-    task?: Task.AsObject,
+    taskList: Array<Task.AsObject>,
   }
 }
+
