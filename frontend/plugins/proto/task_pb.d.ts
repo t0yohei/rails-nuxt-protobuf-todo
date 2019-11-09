@@ -49,23 +49,77 @@ export namespace Tasks {
   }
 }
 
-export class CreateTask extends jspb.Message {
+export class FetchTasksRequest extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): FetchTasksRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: FetchTasksRequest): FetchTasksRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: FetchTasksRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): FetchTasksRequest;
+  static deserializeBinaryFromReader(message: FetchTasksRequest, reader: jspb.BinaryReader): FetchTasksRequest;
+}
+
+export namespace FetchTasksRequest {
+  export type AsObject = {
+  }
+}
+
+export class FetchTasksResponse extends jspb.Message {
+  hasTasks(): boolean;
+  clearTasks(): void;
+  getTasks(): Tasks | undefined;
+  setTasks(value?: Tasks): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): FetchTasksResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: FetchTasksResponse): FetchTasksResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: FetchTasksResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): FetchTasksResponse;
+  static deserializeBinaryFromReader(message: FetchTasksResponse, reader: jspb.BinaryReader): FetchTasksResponse;
+}
+
+export namespace FetchTasksResponse {
+  export type AsObject = {
+    tasks?: Tasks.AsObject,
+  }
+}
+
+export class CreateTaskRequest extends jspb.Message {
   getTitle(): string;
   setTitle(value: string): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): CreateTask.AsObject;
-  static toObject(includeInstance: boolean, msg: CreateTask): CreateTask.AsObject;
+  toObject(includeInstance?: boolean): CreateTaskRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: CreateTaskRequest): CreateTaskRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: CreateTask, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): CreateTask;
-  static deserializeBinaryFromReader(message: CreateTask, reader: jspb.BinaryReader): CreateTask;
+  static serializeBinaryToWriter(message: CreateTaskRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CreateTaskRequest;
+  static deserializeBinaryFromReader(message: CreateTaskRequest, reader: jspb.BinaryReader): CreateTaskRequest;
 }
 
-export namespace CreateTask {
+export namespace CreateTaskRequest {
   export type AsObject = {
     title: string,
+  }
+}
+
+export class CreateTaskResponse extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CreateTaskResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: CreateTaskResponse): CreateTaskResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: CreateTaskResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CreateTaskResponse;
+  static deserializeBinaryFromReader(message: CreateTaskResponse, reader: jspb.BinaryReader): CreateTaskResponse;
+}
+
+export namespace CreateTaskResponse {
+  export type AsObject = {
   }
 }
 

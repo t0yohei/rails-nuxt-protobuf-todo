@@ -18,6 +18,14 @@ message Tasks {
     repeated Task task = 1;
 }
 
-message CreateTask {
+message FetchTasksRequest {}
+
+message FetchTasksResponse {
+    Tasks tasks = 1;
+}
+
+message CreateTaskRequest {
     string title = 1;
 }
+
+message CreateTaskResponse {}
