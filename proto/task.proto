@@ -1,6 +1,3 @@
-syntax = "proto3";
-option ruby_package = "Protos::";
-
 /*
 command:
 protoc --plugin=protoc-gen-ts=./frontend/node_modules/.bin/protoc-gen-ts \
@@ -8,6 +5,9 @@ protoc --plugin=protoc-gen-ts=./frontend/node_modules/.bin/protoc-gen-ts \
 --js_out=import_style=commonjs,binary:./frontend/plugins \
 --ts_out=./frontend/plugins proto/task.proto
 */
+
+syntax = "proto3";
+option ruby_package = "Protos::";
 
 message Task {
     int32 id = 1;
