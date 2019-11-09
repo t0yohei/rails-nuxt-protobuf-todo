@@ -2,13 +2,15 @@
 class Proto::TasksController < ApplicationController
   def index
     tasks = Task.all
-    tasks_proto = ::Protos::Tasks.new
+    tasks_proto = Protos::Tasks.new
     tasks.each do |each_task|
-      task_proto = ::Protos::Task.new(id: each_task.id, title: each_task.title)
+      task_proto = Protos::Task.new(id: each_task.id, title: each_task.title)
       tasks_proto.task.push(task_proto)
     end
-    tasks_proto_encoded_data = Protos::Tasks.encode(tasks_proto)
-    render plain: tasks_proto_encoded_data, status: :ok
+
+    response = Protos::FetchTasksResponse.new(tasks: tasks_proto)
+    response_encoded_data = Protos::FetchTasksResponse.encode(response)
+    render plain: response_encoded_data, status: :ok
   end
 
   # def show
@@ -17,7 +19,7 @@ class Proto::TasksController < ApplicationController
   # end
 
   def create
-    decoded_data = Protos::CreateTask.decode(request.raw_post)
+    decoded_data = Protos::CreateTaskRequest.decode(request.raw_post)
     Task.create(title: decoded_data.title)
     render status: :created
   end
