@@ -30,11 +30,12 @@ class Proto::TasksController < ApplicationController
   #   render json: task, status: :ok
   # end
 
-  # def destroy
-  #   task = Task.find(params[:id])
-  #   task.destroy
-  #   render json: task, status: :no_content
-  # end
+  def destroy
+    delete_task_request = Protos::DeleteTaskRequest.decode(request.raw_post)
+    task = Task.find(delete_task_request.id)
+    task.destroy
+    render status: :no_content
+  end
 
   private
 
