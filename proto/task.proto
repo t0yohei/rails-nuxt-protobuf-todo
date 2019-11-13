@@ -18,7 +18,7 @@ message Tasks {
     repeated Task task = 1;
 }
 
-message FetchTasksRequest {}
+// message FetchTasksRequest {}
 
 message FetchTasksResponse {
     Tasks tasks = 1;
@@ -28,4 +28,10 @@ message CreateTaskRequest {
     string title = 1;
 }
 
-message CreateTaskResponse {}
+// message CreateTaskResponse {}
+
+message DeleteTaskRequest {
+    int32 id = 1;
+}
+
+// message DeleteTaskResponse {}

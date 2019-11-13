@@ -12,24 +12,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "Tasks" do
       repeated :task, :message, 1, "Task"
     end
-    add_message "FetchTasksRequest" do
-    end
     add_message "FetchTasksResponse" do
       optional :tasks, :message, 1, "Tasks"
     end
     add_message "CreateTaskRequest" do
       optional :title, :string, 1
     end
-    add_message "CreateTaskResponse" do
+    add_message "DeleteTaskRequest" do
+      optional :id, :int32, 1
     end
   end
 end
 
 module Protos
-  Task = Google::Protobuf::DescriptorPool.generated_pool.lookup("Task").msgclass
-  Tasks = Google::Protobuf::DescriptorPool.generated_pool.lookup("Tasks").msgclass
-  FetchTasksRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("FetchTasksRequest").msgclass
-  FetchTasksResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("FetchTasksResponse").msgclass
-  CreateTaskRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("CreateTaskRequest").msgclass
-  CreateTaskResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("CreateTaskResponse").msgclass
+  Task = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("Task").msgclass
+  Tasks = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("Tasks").msgclass
+  FetchTasksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("FetchTasksResponse").msgclass
+  CreateTaskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("CreateTaskRequest").msgclass
+  DeleteTaskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("DeleteTaskRequest").msgclass
 end
