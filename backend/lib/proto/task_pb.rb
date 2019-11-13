@@ -18,9 +18,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "CreateTaskRequest" do
       optional :title, :string, 1
     end
-    add_message "DeleteTaskRequest" do
-      optional :id, :int32, 1
-    end
   end
 end
 
@@ -29,5 +26,4 @@ module Protos
   Tasks = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("Tasks").msgclass
   FetchTasksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("FetchTasksResponse").msgclass
   CreateTaskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("CreateTaskRequest").msgclass
-  DeleteTaskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("DeleteTaskRequest").msgclass
 end

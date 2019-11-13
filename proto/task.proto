@@ -30,8 +30,9 @@ message CreateTaskRequest {
 
 // message CreateTaskResponse {}
 
-message DeleteTaskRequest {
-    int32 id = 1;
-}
+/*
+DELETE proto/tasks/:id タスクの削除
+*/
+// message DeleteTaskRequest {}
 
 // message DeleteTaskResponse {}

@@ -91,23 +91,3 @@ export namespace CreateTaskRequest {
   }
 }
 
-export class DeleteTaskRequest extends jspb.Message {
-  getId(): number;
-  setId(value: number): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DeleteTaskRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: DeleteTaskRequest): DeleteTaskRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: DeleteTaskRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DeleteTaskRequest;
-  static deserializeBinaryFromReader(message: DeleteTaskRequest, reader: jspb.BinaryReader): DeleteTaskRequest;
-}
-
-export namespace DeleteTaskRequest {
-  export type AsObject = {
-    id: number,
-  }
-}
-
