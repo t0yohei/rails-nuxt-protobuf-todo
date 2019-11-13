@@ -31,8 +31,7 @@ class Proto::TasksController < ApplicationController
   # end
 
   def destroy
-    delete_task_request = Protos::DeleteTaskRequest.decode(request.raw_post)
-    task = Task.find(delete_task_request.id)
+    task = Task.find(params[:id])
     task.destroy
     render status: :no_content
   end
