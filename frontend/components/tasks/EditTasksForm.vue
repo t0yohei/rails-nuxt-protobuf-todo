@@ -6,11 +6,11 @@
         <th>title</th>
         <th>delete</th>
       </tr>
-      <tr v-for="task in tasks" :key="task.id">
-        <td>{{ task.id }}</td>
-        <td class="task-title">{{ task.title }}</td>
+      <tr v-for="task in tasks.getTaskList()" :key="task.getId()">
+        <td>{{ task.getId() }}</td>
+        <td class="task-title">{{ task.getTitle() }}</td>
         <td class="delete-task-button-td">
-          <button class="delete-task-button" @click="deleteTask(task.id)">
+          <button class="delete-task-button" @click="deleteTask(task.getId())">
             削除
           </button>
         </td>
@@ -21,11 +21,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { Tasks } from '../../plugins/proto/task_pb'
 
 export default Vue.extend({
   props: {
     tasks: {
-      type: Array,
+      type: Tasks,
       required: true
     }
   },

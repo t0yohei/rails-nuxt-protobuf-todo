@@ -1,7 +1,7 @@
 <template>
   <div>
     <edit-tasks-form
-      :tasks="tasks.toObject().taskList"
+      :tasks="tasks"
       @delete-task-clicked="deleteTask"
     ></edit-tasks-form>
     <new-task-form @add-task-clicked="addTask"></new-task-form>
