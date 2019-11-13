@@ -18,12 +18,18 @@ message Tasks {
     repeated Task task = 1;
 }
 
+/*
+GET proto/tasks タスク一覧の取得
+*/
 // message FetchTasksRequest {}
 
 message FetchTasksResponse {
     Tasks tasks = 1;
 }
 
+/*
+POST proto/tasks タスクの新規追加
+*/
 message CreateTaskRequest {
     string title = 1;
 }
