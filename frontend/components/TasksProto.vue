@@ -13,7 +13,8 @@ import Vue from 'vue'
 import {
   Tasks,
   FetchTasksResponse,
-  CreateTaskRequest
+  CreateTaskRequest,
+  CreateTaskResponse
 } from '../plugins/proto/task_pb'
 import EditTasksForm from './tasks/EditTasksForm.vue'
 import NewTaskForm from './tasks/NewTaskForm.vue'
@@ -55,12 +56,31 @@ export default Vue.extend({
       const createTaskReqest = new CreateTaskRequest()
       createTaskReqest.setTitle(newTaskTitle)
       const createTaskReqestEncoded = createTaskReqest.serializeBinary()
-      await this.$axios.$post('proto/tasks', createTaskReqestEncoded)
-      this.fetchTasks()
+      try {
+        const res = await this.$axios.$post(
+          'proto/tasks',
+          createTaskReqestEncoded,
+          this.protoAxiosConfig
+        )
+        const createTaskResponse = CreateTaskResponse.deserializeBinary(res)
+        this.showMessage(createTaskResponse)
+        this.fetchTasks()
+      } catch (error) {
+        const createTaskResponse = CreateTaskResponse.deserializeBinary(
+          error.response.data
+        )
+        this.showMessage(createTaskResponse)
+      }
     },
     async deleteTask(targetTaskId: string): Promise<void> {
       await this.$axios.$delete(`proto/tasks/${targetTaskId}`)
       this.fetchTasks()
+    },
+    showMessage(createTaskResponse: CreateTaskResponse): void {
+      const status = createTaskResponse.getStatus()
+      if (status !== undefined) {
+        console.log(status.getMessage())
+      }
     }
   }
 })
