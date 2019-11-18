@@ -49,6 +49,30 @@ export namespace Tasks {
   }
 }
 
+export class Status extends jspb.Message {
+  getCode(): number;
+  setCode(value: number): void;
+
+  getMessage(): string;
+  setMessage(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Status.AsObject;
+  static toObject(includeInstance: boolean, msg: Status): Status.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: Status, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Status;
+  static deserializeBinaryFromReader(message: Status, reader: jspb.BinaryReader): Status;
+}
+
+export namespace Status {
+  export type AsObject = {
+    code: number,
+    message: string,
+  }
+}
+
 export class FetchTasksResponse extends jspb.Message {
   hasTasks(): boolean;
   clearTasks(): void;
@@ -88,6 +112,28 @@ export class CreateTaskRequest extends jspb.Message {
 export namespace CreateTaskRequest {
   export type AsObject = {
     title: string,
+  }
+}
+
+export class CreateTaskResponse extends jspb.Message {
+  hasStatus(): boolean;
+  clearStatus(): void;
+  getStatus(): Status | undefined;
+  setStatus(value?: Status): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CreateTaskResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: CreateTaskResponse): CreateTaskResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: CreateTaskResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CreateTaskResponse;
+  static deserializeBinaryFromReader(message: CreateTaskResponse, reader: jspb.BinaryReader): CreateTaskResponse;
+}
+
+export namespace CreateTaskResponse {
+  export type AsObject = {
+    status?: Status.AsObject,
   }
 }
 

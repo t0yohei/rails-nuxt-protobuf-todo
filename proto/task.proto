@@ -18,6 +18,11 @@ message Tasks {
     repeated Task task = 1;
 }
 
+message Status {
+    int32 code = 1;
+    string message = 2;
+}
+
 /*
 GET proto/tasks タスク一覧の取得
 */
@@ -34,7 +39,14 @@ message CreateTaskRequest {
     string title = 1;
 }
 
-// message CreateTaskResponse {}
+/*
+タスクの新規追加成功・失敗時のレスポンス
+Scuccess Status: 201
+Error Status: 400
+*/
+message CreateTaskResponse {
+    Status status = 1;
+}
 
 /*
 DELETE proto/tasks/:id タスクの削除
