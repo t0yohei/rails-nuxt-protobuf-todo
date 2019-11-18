@@ -20,8 +20,18 @@ class Proto::TasksController < ApplicationController
 
   def create
     decoded_data = Protos::CreateTaskRequest.decode(request.raw_post)
-    Task.create(title: decoded_data.title)
-    render status: :created
+    task = Task.new(title: decoded_data.title)
+    if task.save
+      status = Protos::Status.new(code: 201, message: "#{task.title}を作成しました。")
+      message = Protos::CreateTaskResponse.new(status: status)
+      message_encoded = Protos::CreateTaskResponse.encode(message)
+      render plain: message_encoded, status: :created
+    else
+      status = Protos::Status.new(code: 400, message: "#{task.title}の作成に失敗しました。")
+      message = Protos::CreateTaskResponse.new(status: status)
+      message_encoded = Protos::CreateTaskResponse.encode(message)
+      render plain: message_encoded, status: :bad_request
+    end
   end
 
   # def update
