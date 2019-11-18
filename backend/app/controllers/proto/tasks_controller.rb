@@ -23,14 +23,10 @@ class Proto::TasksController < ApplicationController
     task = Task.new(title: decoded_data.title)
     if task.save
       status = Protos::Status.new(code: 201, message: "#{task.title}を作成しました。")
-      message = Protos::CreateTaskResponse.new(status: status)
-      message_encoded = Protos::CreateTaskResponse.encode(message)
-      render plain: message_encoded, status: :created
+      render plain: build_create_message_encoded(status: status), status: :created
     else
       status = Protos::Status.new(code: 400, message: "#{task.title}の作成に失敗しました。")
-      message = Protos::CreateTaskResponse.new(status: status)
-      message_encoded = Protos::CreateTaskResponse.encode(message)
-      render plain: message_encoded, status: :bad_request
+      render plain: build_create_message_encoded(status: status), status: :bad_request
     end
   end
 
@@ -51,4 +47,9 @@ class Proto::TasksController < ApplicationController
   # def task_params
   #   params.require(:task).permit(:title)
   # end
+
+  def build_create_message_encoded(status:)
+    message = Protos::CreateTaskResponse.new(status: status)
+    Protos::CreateTaskResponse.encode(message)
+  end
 end
