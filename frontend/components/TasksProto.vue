@@ -52,9 +52,13 @@ export default Vue.extend({
         this.tasks = tasks
       }
     },
-    async addTask(newTaskTitle: string): Promise<void> {
+    async addTask(
+      newTaskTitle: string,
+      newTaskDescription: string
+    ): Promise<void> {
       const createTaskReqest = new CreateTaskRequest()
       createTaskReqest.setTitle(newTaskTitle)
+      createTaskReqest.setDescription(newTaskDescription)
       const createTaskReqestEncoded = createTaskReqest.serializeBinary()
       try {
         const res = await this.$axios.$post(

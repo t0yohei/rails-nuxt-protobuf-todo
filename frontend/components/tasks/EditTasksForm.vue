@@ -4,11 +4,13 @@
       <tr>
         <th>id</th>
         <th>title</th>
+        <th>description</th>
         <th>delete</th>
       </tr>
       <tr v-for="task in tasks.getTaskList()" :key="task.getId()">
         <td>{{ task.getId() }}</td>
         <td class="task-title">{{ task.getTitle() }}</td>
+        <td class="task-description">{{ task.getDescription() }}</td>
         <td class="delete-task-button-td">
           <button class="delete-task-button" @click="deleteTask(task.getId())">
             削除
@@ -50,6 +52,9 @@ export default Vue.extend({
 }
 .task-title {
   width: 200px;
+}
+.task-description {
+  width: 500px;
 }
 .delete-task-button-td {
   text-align: center;
