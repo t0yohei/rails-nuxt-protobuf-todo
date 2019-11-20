@@ -66,9 +66,8 @@ export default Vue.extend({
         this.showMessage(createTaskResponse)
         this.fetchTasks()
       } catch (error) {
-        const createTaskResponse = CreateTaskResponse.deserializeBinary(
-          error.response.data
-        )
+        const res = error.response.data
+        const createTaskResponse = CreateTaskResponse.deserializeBinary(res)
         this.showMessage(createTaskResponse)
       }
     },
