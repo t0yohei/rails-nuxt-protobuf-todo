@@ -4,7 +4,11 @@ class Proto::TasksController < ApplicationController
     tasks = Task.all
     tasks_proto = Protos::Tasks.new
     tasks.each do |each_task|
-      task_proto = Protos::Task.new(id: each_task.id, title: each_task.title)
+      task_proto = Protos::Task.new(
+        id: each_task.id,
+        title: each_task.title,
+        description: each_task.description
+      )
       tasks_proto.task.push(task_proto)
     end
 
@@ -20,7 +24,7 @@ class Proto::TasksController < ApplicationController
 
   def create
     decoded_data = Protos::CreateTaskRequest.decode(request.raw_post)
-    task = Task.new(title: decoded_data.title)
+    task = Task.new(title: decoded_data.title, description: decoded_data.description)
     if task.save
       status = Protos::Status.new(code: 201, message: "#{task.title}を作成しました。")
       render plain: build_create_message_encoded(status: status), status: :created
