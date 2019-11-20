@@ -10,6 +10,9 @@ export class Task extends jspb.Message {
   getTitle(): string;
   setTitle(value: string): void;
 
+  getDescription(): string;
+  setDescription(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Task.AsObject;
   static toObject(includeInstance: boolean, msg: Task): Task.AsObject;
@@ -24,6 +27,7 @@ export namespace Task {
   export type AsObject = {
     id: number,
     title: string,
+    description: string,
   }
 }
 
@@ -99,6 +103,9 @@ export class CreateTaskRequest extends jspb.Message {
   getTitle(): string;
   setTitle(value: string): void;
 
+  getDescription(): string;
+  setDescription(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateTaskRequest.AsObject;
   static toObject(includeInstance: boolean, msg: CreateTaskRequest): CreateTaskRequest.AsObject;
@@ -112,6 +119,7 @@ export class CreateTaskRequest extends jspb.Message {
 export namespace CreateTaskRequest {
   export type AsObject = {
     title: string,
+    description: string,
   }
 }
 

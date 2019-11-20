@@ -12,6 +12,7 @@ option ruby_package = "Protos::";
 message Task {
     int32 id = 1;
     string title = 2;
+    string description = 3;
 }
 
 message Tasks {
@@ -37,6 +38,7 @@ POST proto/tasks タスクの新規追加
 */
 message CreateTaskRequest {
     string title = 1;
+    string description = 2;
 }
 
 /*

@@ -177,7 +177,8 @@ proto.Task.prototype.toObject = function(opt_includeInstance) {
 proto.Task.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    title: jspb.Message.getFieldWithDefault(msg, 2, "")
+    title: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -222,6 +223,10 @@ proto.Task.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setTitle(value);
       break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -265,6 +270,13 @@ proto.Task.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -301,6 +313,24 @@ proto.Task.prototype.getTitle = function() {
  */
 proto.Task.prototype.setTitle = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string description = 3;
+ * @return {string}
+ */
+proto.Task.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.Task} returns this
+ */
+proto.Task.prototype.setDescription = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -807,7 +837,8 @@ proto.CreateTaskRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.CreateTaskRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    title: jspb.Message.getFieldWithDefault(msg, 1, "")
+    title: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -848,6 +879,10 @@ proto.CreateTaskRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setTitle(value);
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -884,6 +919,13 @@ proto.CreateTaskRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -902,6 +944,24 @@ proto.CreateTaskRequest.prototype.getTitle = function() {
  */
 proto.CreateTaskRequest.prototype.setTitle = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string description = 2;
+ * @return {string}
+ */
+proto.CreateTaskRequest.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.CreateTaskRequest} returns this
+ */
+proto.CreateTaskRequest.prototype.setDescription = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

@@ -8,6 +8,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "Task" do
       optional :id, :int32, 1
       optional :title, :string, 2
+      optional :description, :string, 3
     end
     add_message "Tasks" do
       repeated :task, :message, 1, "Task"
@@ -21,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "CreateTaskRequest" do
       optional :title, :string, 1
+      optional :description, :string, 2
     end
     add_message "CreateTaskResponse" do
       optional :status, :message, 1, "Status"
