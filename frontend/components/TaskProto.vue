@@ -1,18 +1,34 @@
 <template>
-  <div>
-    {{ task.toObject() }}
+  <div class="task-proto">
+    <div class="task-element">id: {{ task.id }}</div>
+    <div class="task-element">
+      <label
+        >title:
+        <input v-model="task.title" class="input-title" placeholder="title" />
+      </label>
+    </div>
+    <div class="task-element">
+      <label
+        >description:
+        <textarea
+          v-model="task.description"
+          class="input-description"
+          placeholder="description"
+        />
+      </label>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Task, FetchTaskResponse } from '../plugins/proto/task_pb'
+import { FetchTaskResponse } from '../plugins/proto/task_pb'
 
 export default Vue.extend({
   // components: {},
   data() {
     return {
-      task: new Task()
+      task: { id: 0, title: '', description: '' }
     }
   },
 
@@ -35,11 +51,33 @@ export default Vue.extend({
       const fetchTaskResponse = FetchTaskResponse.deserializeBinary(res)
       const task = fetchTaskResponse.getTask()
       if (task !== undefined) {
-        this.task = task
+        this.task = task.toObject()
       }
     }
   }
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.task-proto {
+  margin: 10px;
+}
+.task-element {
+  margin: 15px;
+}
+.input-title {
+  display: block;
+  margin-top: 5px;
+  width: 300px;
+  height: 30px;
+}
+.input-description {
+  display: block;
+  margin-top: 5px;
+  width: 600px;
+  height: 300px;
+}
+label {
+  display: block;
+}
+</style>
