@@ -1,41 +1,44 @@
 <template>
   <div>
-    {{ id }}
+    {{ task.toObject() }}
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-// import { Task } from '../plugins/proto/task_pb'
+import { Task, FetchTaskResponse } from '../plugins/proto/task_pb'
 
 export default Vue.extend({
-  props: {
-    id: {
-      type: Number,
-      required: true
+  // components: {},
+  data() {
+    return {
+      task: new Task()
+    }
+  },
+
+  computed: {
+    protoAxiosConfig(): Object {
+      return {
+        responseType: 'arraybuffer'
+      }
+    }
+  },
+  created(): void {
+    this.fetchTask()
+  },
+  methods: {
+    async fetchTask(): Promise<void> {
+      const res = await this.$axios.$get(
+        `proto/tasks/${this.$route.params.id}`,
+        this.protoAxiosConfig
+      )
+      const fetchTaskResponse = FetchTaskResponse.deserializeBinary(res)
+      const task = fetchTaskResponse.getTask()
+      if (task !== undefined) {
+        this.task = task
+      }
     }
   }
-  // components: {
-  //   EditTasksForm,
-  //   NewTaskForm
-  // },
-  // data() {
-  //   return {
-  //     tasks: new Tasks()
-  //   }
-  // },
-  // computed: {
-  //   protoAxiosConfig(): Object {
-  //     return {
-  //       responseType: 'arraybuffer'
-  //     }
-  //   }
-  // },
-  // created(): void {
-  //   this.fetchTasks()
-  // },
-  // methods: {
-  // }
 })
 </script>
 
