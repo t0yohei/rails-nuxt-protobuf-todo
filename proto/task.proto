@@ -34,6 +34,15 @@ message FetchTasksResponse {
 }
 
 /*
+GET proto/task/:id タスク一件の取得
+*/
+// message FetchTaskRequest {}
+
+message FetchTaskResponse {
+    Task task = 1;
+}
+
+/*
 POST proto/tasks タスクの新規追加
 */
 message CreateTaskRequest {

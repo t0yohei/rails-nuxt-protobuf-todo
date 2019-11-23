@@ -99,6 +99,28 @@ export namespace FetchTasksResponse {
   }
 }
 
+export class FetchTaskResponse extends jspb.Message {
+  hasTask(): boolean;
+  clearTask(): void;
+  getTask(): Task | undefined;
+  setTask(value?: Task): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): FetchTaskResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: FetchTaskResponse): FetchTaskResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: FetchTaskResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): FetchTaskResponse;
+  static deserializeBinaryFromReader(message: FetchTaskResponse, reader: jspb.BinaryReader): FetchTaskResponse;
+}
+
+export namespace FetchTaskResponse {
+  export type AsObject = {
+    task?: Task.AsObject,
+  }
+}
+
 export class CreateTaskRequest extends jspb.Message {
   getTitle(): string;
   setTitle(value: string): void;
