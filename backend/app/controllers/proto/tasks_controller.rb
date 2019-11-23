@@ -17,10 +17,17 @@ class Proto::TasksController < ApplicationController
     render plain: response_encoded_data, status: :ok
   end
 
-  # def show
-  #   task = Task.find(params[:id])
-  #   render json: task, status: :ok
-  # end
+  def show
+    task = Task.find(params[:id])
+    task_proto = Protos::Task.new(
+      id: task.id,
+      title: task.title,
+      description: task.description
+    )
+    response = Protos::FetchTaskResponse.new(task: task_proto)
+    response_encoded_data = Protos::FetchTaskResponse.encode(response)
+    render plain: response_encoded_data, status: :ok
+  end
 
   def create
     decoded_data = Protos::CreateTaskRequest.decode(request.raw_post)
