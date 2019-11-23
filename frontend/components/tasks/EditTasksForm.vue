@@ -13,6 +13,10 @@
         <td class="task-title">{{ task.getTitle() }}</td>
         <td class="task-description">{{ task.getDescription() }}</td>
         <td class="button-td">
+          <nuxt-link
+            :to="{ name: 'tasksProto-id', params: { id: task.getId() } }"
+            >編集</nuxt-link
+          >
           <button class="edit-task-button task-button">
             編集
           </button>

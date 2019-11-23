@@ -1,17 +1,17 @@
 <template>
   <div>
-    <TasksProto />
+    hoge
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import TasksProto from '../components/TasksProto.vue'
+// import TaskProto from '../../components/TaskProto.vue'
 
 export default Vue.extend({
-  components: {
-    TasksProto
-  }
+  // components: {
+  //   TaskProto
+  // }
 })
 </script>
 
