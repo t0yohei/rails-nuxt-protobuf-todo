@@ -41,11 +41,17 @@ class Proto::TasksController < ApplicationController
     end
   end
 
-  # def update
-  #   task = Task.find(params[:id])
-  #   task.update(task_params)
-  #   render json: task, status: :ok
-  # end
+  def update
+    task = Task.find(params[:id])
+    decoded_data = Protos::UpdateTaskRequest.decode(request.raw_post)
+    if task.update(title: decoded_data.title, description: decoded_data.description)
+      status = Protos::Status.new(code: 200, message: "#{task.title}を更新しました。")
+      render plain: build_update_message_encoded(status: status), status: :ok
+    else
+      status = Protos::Status.new(code: 400, message: "#{task.title}の更新に失敗しました。")
+      render plain: build_update_message_encoded(status: status), status: :bad_request
+    end
+  end
 
   def destroy
     task = Task.find(params[:id])
@@ -62,5 +68,10 @@ class Proto::TasksController < ApplicationController
   def build_create_message_encoded(status:)
     message = Protos::CreateTaskResponse.new(status: status)
     Protos::CreateTaskResponse.encode(message)
+  end
+
+  def build_update_message_encoded(status:)
+    message = Protos::UpdateTaskResponse.new(status: status)
+    Protos::UpdateTaskResponse.encode(message)
   end
 end

@@ -60,7 +60,7 @@ message CreateTaskResponse {
 }
 
 /*
-POST proto/tasks/:id タスクの更新
+PATCH proto/tasks/:id タスクの更新
 */
 message UpdateTaskRequest {
     string title = 1;
