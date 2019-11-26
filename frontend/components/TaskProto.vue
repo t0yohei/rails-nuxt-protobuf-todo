@@ -23,7 +23,10 @@
     >
       保存
     </button>
-    <button class="delete-task-button task-button task-element" @click="1 + 1">
+    <button
+      class="delete-task-button task-button task-element"
+      @click="deleteTask"
+    >
       削除
     </button>
   </div>
@@ -86,6 +89,10 @@ export default Vue.extend({
         const updateTaskResponse = UpdateTaskResponse.deserializeBinary(res)
         this.showMessage(updateTaskResponse)
       }
+    },
+    async deleteTask(): Promise<void> {
+      await this.$axios.$delete(`proto/tasks/${this.task.id}`)
+      this.$router.push('/tasksProto')
     },
     showMessage(updateTaskResponse: UpdateTaskResponse): void {
       const status = updateTaskResponse.getStatus()
