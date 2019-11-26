@@ -61,10 +61,6 @@ class Proto::TasksController < ApplicationController
 
   private
 
-  # def task_params
-  #   params.require(:task).permit(:title)
-  # end
-
   def build_create_message_encoded(status:)
     message = Protos::CreateTaskResponse.new(status: status)
     Protos::CreateTaskResponse.encode(message)
