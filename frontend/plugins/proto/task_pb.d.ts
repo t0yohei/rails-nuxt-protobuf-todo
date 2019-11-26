@@ -167,3 +167,49 @@ export namespace CreateTaskResponse {
   }
 }
 
+export class UpdateTaskRequest extends jspb.Message {
+  getTitle(): string;
+  setTitle(value: string): void;
+
+  getDescription(): string;
+  setDescription(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): UpdateTaskRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: UpdateTaskRequest): UpdateTaskRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: UpdateTaskRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): UpdateTaskRequest;
+  static deserializeBinaryFromReader(message: UpdateTaskRequest, reader: jspb.BinaryReader): UpdateTaskRequest;
+}
+
+export namespace UpdateTaskRequest {
+  export type AsObject = {
+    title: string,
+    description: string,
+  }
+}
+
+export class UpdateTaskResponse extends jspb.Message {
+  hasStatus(): boolean;
+  clearStatus(): void;
+  getStatus(): Status | undefined;
+  setStatus(value?: Status): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): UpdateTaskResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: UpdateTaskResponse): UpdateTaskResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: UpdateTaskResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): UpdateTaskResponse;
+  static deserializeBinaryFromReader(message: UpdateTaskResponse, reader: jspb.BinaryReader): UpdateTaskResponse;
+}
+
+export namespace UpdateTaskResponse {
+  export type AsObject = {
+    status?: Status.AsObject,
+  }
+}
+

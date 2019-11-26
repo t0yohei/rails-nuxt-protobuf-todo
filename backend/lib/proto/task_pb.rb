@@ -30,6 +30,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "CreateTaskResponse" do
       optional :status, :message, 1, "Status"
     end
+    add_message "UpdateTaskRequest" do
+      optional :title, :string, 1
+      optional :description, :string, 2
+    end
+    add_message "UpdateTaskResponse" do
+      optional :status, :message, 1, "Status"
+    end
   end
 end
 
@@ -41,4 +48,6 @@ module Protos
   FetchTaskResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("FetchTaskResponse").msgclass
   CreateTaskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("CreateTaskRequest").msgclass
   CreateTaskResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("CreateTaskResponse").msgclass
+  UpdateTaskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("UpdateTaskRequest").msgclass
+  UpdateTaskResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("UpdateTaskResponse").msgclass
 end
