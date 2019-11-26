@@ -80,7 +80,7 @@ export default Vue.extend({
   color: black;
 }
 .edit-task-button {
-  background: paleturquoise;
+  background: lightgray;
 }
 .delete-task-button {
   background: pink;

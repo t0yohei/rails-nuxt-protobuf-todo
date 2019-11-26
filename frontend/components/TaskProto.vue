@@ -17,6 +17,12 @@
         />
       </label>
     </div>
+    <button class="update-task-button task-button task-element" @click="1 + 1">
+      保存
+    </button>
+    <button class="delete-task-button task-button task-element" @click="1 + 1">
+      削除
+    </button>
   </div>
 </template>
 
@@ -61,6 +67,7 @@ export default Vue.extend({
 <style scoped>
 .task-proto {
   margin: 10px;
+  width: 615px;
 }
 .task-element {
   margin: 15px;
@@ -79,5 +86,21 @@ export default Vue.extend({
 }
 label {
   display: block;
+}
+.task-button {
+  display: inline-block;
+  border-radius: 4px;
+  text-decoration: none;
+  padding: 10px 30px;
+  font-size: 14px;
+  color: black;
+}
+.update-task-button {
+  background: paleturquoise;
+}
+.delete-task-button {
+  background: pink;
+  float: right;
+  margin-right: 0;
 }
 </style>
