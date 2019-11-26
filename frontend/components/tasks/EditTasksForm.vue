@@ -15,11 +15,9 @@
         <td class="button-td">
           <nuxt-link
             :to="{ name: 'tasksProto-id', params: { id: task.getId() } }"
+            class="edit-task-button task-button"
             >編集</nuxt-link
           >
-          <button class="edit-task-button task-button">
-            編集
-          </button>
         </td>
         <td class="button-td">
           <button
@@ -73,7 +71,13 @@ export default Vue.extend({
   text-align: center;
 }
 .task-button {
+  display: inline-block;
+  border-radius: 4px;
+  text-decoration: none;
+  padding: 10px 30px;
   margin: 2px;
+  font-size: 14px;
+  color: black;
 }
 .edit-task-button {
   background: paleturquoise;
