@@ -17,7 +17,10 @@
         />
       </label>
     </div>
-    <button class="update-task-button task-button task-element" @click="1 + 1">
+    <button
+      class="update-task-button task-button task-element"
+      @click="updateTask"
+    >
       保存
     </button>
     <button class="delete-task-button task-button task-element" @click="1 + 1">
@@ -28,7 +31,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { FetchTaskResponse } from '../plugins/proto/task_pb'
+import {
+  FetchTaskResponse,
+  UpdateTaskRequest,
+  UpdateTaskResponse
+} from '../plugins/proto/task_pb'
 
 export default Vue.extend({
   // components: {},
@@ -58,6 +65,32 @@ export default Vue.extend({
       const task = fetchTaskResponse.getTask()
       if (task !== undefined) {
         this.task = task.toObject()
+      }
+    },
+    async updateTask(): Promise<void> {
+      const updateTaskRequest = new UpdateTaskRequest()
+      updateTaskRequest.setTitle(this.task.title)
+      updateTaskRequest.setDescription(this.task.description)
+      const updateTaskRequestEncoded = updateTaskRequest.serializeBinary()
+      try {
+        const res = await this.$axios.$patch(
+          `proto/tasks/${this.task.id}`,
+          updateTaskRequestEncoded,
+          this.protoAxiosConfig
+        )
+        const updateTaskResponse = UpdateTaskResponse.deserializeBinary(res)
+        this.showMessage(updateTaskResponse)
+        this.$router.push('/tasksProto')
+      } catch (error) {
+        const res = error.response.data
+        const updateTaskResponse = UpdateTaskResponse.deserializeBinary(res)
+        this.showMessage(updateTaskResponse)
+      }
+    },
+    showMessage(updateTaskResponse: UpdateTaskResponse): void {
+      const status = updateTaskResponse.getStatus()
+      if (status !== undefined) {
+        console.log(status.getMessage())
       }
     }
   }
