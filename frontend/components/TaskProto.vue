@@ -41,7 +41,6 @@ import {
 } from '../plugins/proto/task_pb'
 
 export default Vue.extend({
-  // components: {},
   data() {
     return {
       task: { id: 0, title: '', description: '' }
@@ -55,9 +54,11 @@ export default Vue.extend({
       }
     }
   },
+
   created(): void {
     this.fetchTask()
   },
+
   methods: {
     async fetchTask(): Promise<void> {
       const res = await this.$axios.$get(
