@@ -9,20 +9,35 @@ RSpec.describe "Proto::Tasks", type: :request do
 
     context "taskが1件も存在しないとき" do
       it "空の encoded_data が返却されること" do
-
+        get proto_tasks_path
+        expect(response).to have_http_status(200)
+        decoded_response = Protos::FetchTasksResponse.decode(response.body)
+        expect(decoded_response.tasks.task).to be_empty
       end
     end
 
     context "taskが1件存在するとき" do
-
+      let!(:task) { Task.create(id: 1, title: 'title', description: 'description') }
       it "task1件分の encoded_data が返却されること" do
-
+        get proto_tasks_path
+        decoded_response = Protos::FetchTasksResponse.decode(response.body)
+        expect(decoded_response.tasks.task.count).to eq(1)
+        expect(decoded_response.tasks.task.first.id).to eq(task.id)
+        expect(decoded_response.tasks.task.first.title).to eq(task.title)
+        expect(decoded_response.tasks.task.first.description).to eq(task.description)
       end
     end
 
     context "taskが2件存在するとき" do
+      let!(:task1) { Task.create(id: 1, title: 'title1', description: 'description1') }
+      let!(:task2) { Task.create(id: 2, title: 'title2', description: 'description2') }
       it "task2件分の encoded_data が返却されること" do
-
+        get proto_tasks_path
+        decoded_response = Protos::FetchTasksResponse.decode(response.body)
+        expect(decoded_response.tasks.task.count).to eq(2)
+        expect(decoded_response.tasks.task.first.id).to eq(task1.id)
+        expect(decoded_response.tasks.task.first.title).to eq(task1.title)
+        expect(decoded_response.tasks.task.first.description).to eq(task1.description)
       end
     end
   end
