@@ -41,4 +41,16 @@ RSpec.describe "Proto::Tasks", type: :request do
       end
     end
   end
+
+  describe "GET /proto/task/:id" do
+    context "存在しないtaskのidを指定したとき" do
+      it "404エラーのレスポンスが返却されること" do
+      end
+    end
+
+    context "taskが1件存在するとき" do
+      it "task1件分の encoded_data が返却されること" do
+      end
+    end
+  end
 end
