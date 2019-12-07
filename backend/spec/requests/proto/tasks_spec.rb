@@ -49,7 +49,13 @@ RSpec.describe "Proto::Tasks", type: :request do
     end
 
     context "taskが1件存在するとき" do
+      let!(:task) { Task.create(id: 1, title: 'title', description: 'description') }
       it "task1件分の encoded_data が返却されること" do
+        get proto_task_path(id: 1)
+        decoded_response = Protos::FetchTaskResponse.decode(response.body)
+        expect(decoded_response.task.id).to eq(task.id)
+        expect(decoded_response.task.title).to eq(task.title)
+        expect(decoded_response.task.description).to eq(task.description)
       end
     end
   end
