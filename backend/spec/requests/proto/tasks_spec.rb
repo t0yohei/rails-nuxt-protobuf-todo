@@ -101,13 +101,13 @@ RSpec.describe "Proto::Tasks", type: :request do
 
     context "存在する id が指定されたとき" do
       let!(:task) { Task.create(id: 1, title: 'title', description: 'description') }
+      let(:id) { task.id }
+      let(:params_encoded) {
+        Protos::UpdateTaskRequest.encode(Protos::UpdateTaskRequest.new(params))
+      }
 
       context "正しい入力値が送られてきた時" do
-        let(:id) { task.id }
         let(:params) {{ title: 'title_changed', description: 'description_changed' }}
-        let(:params_encoded) {
-          Protos::UpdateTaskRequest.encode(Protos::UpdateTaskRequest.new(params))
-        }
 
         it "成功のレスポンスが帰ること" do
           subject
@@ -122,6 +122,29 @@ RSpec.describe "Proto::Tasks", type: :request do
           expect(task.title).to eq(params[:title])
           expect(task.description).to eq(params[:description])
         end
+      end
+
+      context "不正な入力値が送られてきた時" do
+        let(:params) {{ description: 'description_changed' }}
+
+        it "失敗のレスポンスが帰ること" do
+          post proto_tasks_url, params: params_encoded
+          decoded_response = Protos::UpdateTaskResponse.decode(response.body)
+          expect(decoded_response.status.code).to eq(400)
+          expect(decoded_response.status.message).to eq('の作成に失敗しました。')
+        end
+
+        it "データが更新されていないこと" do
+          subject
+          task.reload
+          expect(task.title).to eq('title')
+          expect(task.description).not_to eq(params[:description])
+        end
+      end
+    end
+
+    context "存在しない id が指定されたとき" do
+      it "レコードの更新が失敗すること" do
       end
     end
   end
