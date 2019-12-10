@@ -2,14 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "Proto::Tasks", type: :request do
   describe "GET /proto/tasks" do
+    subject { get proto_tasks_path }
     it "特に条件を指定しなくても、200を返すこと" do
-      get proto_tasks_path
+      subject
       expect(response).to have_http_status(200)
     end
 
     context "taskが1件も存在しないとき" do
       it "空の encoded_data が返却されること" do
-        get proto_tasks_path
+        subject
         expect(response).to have_http_status(200)
         decoded_response = Protos::FetchTasksResponse.decode(response.body)
         expect(decoded_response.tasks.task).to be_empty
@@ -19,7 +20,7 @@ RSpec.describe "Proto::Tasks", type: :request do
     context "taskが1件存在するとき" do
       let!(:task) { Task.create(id: 1, title: 'title', description: 'description') }
       it "task1件分の encoded_data が返却されること" do
-        get proto_tasks_path
+        subject
         decoded_response = Protos::FetchTasksResponse.decode(response.body)
         expect(decoded_response.tasks.task.count).to eq(1)
         expect(decoded_response.tasks.task.first.id).to eq(task.id)
@@ -32,7 +33,7 @@ RSpec.describe "Proto::Tasks", type: :request do
       let!(:task1) { Task.create(id: 1, title: 'title1', description: 'description1') }
       let!(:task2) { Task.create(id: 2, title: 'title2', description: 'description2') }
       it "task2件分の encoded_data が返却されること" do
-        get proto_tasks_path
+        subject
         decoded_response = Protos::FetchTasksResponse.decode(response.body)
         expect(decoded_response.tasks.task.count).to eq(2)
         expect(decoded_response.tasks.task.first.id).to eq(task1.id)
@@ -61,32 +62,33 @@ RSpec.describe "Proto::Tasks", type: :request do
   end
 
   describe "POST /proto/tasks" do
+    subject { post proto_tasks_path, params: params_encoded }
+    let(:params_encoded) {
+      Protos::CreateTaskRequest.encode(Protos::CreateTaskRequest.new(params))
+    }
+
     context "正しい入力値が送られてきた時" do
       let(:params) {{ title: 'title', description: 'description' }}
-      let(:params_encoded) {
-        Protos::CreateTaskRequest.encode(Protos::CreateTaskRequest.new(params))
-      }
+
       it "レコードの作成が完了すること" do
-        expect { post proto_tasks_url, params: params_encoded }.to change{ Task.count }.by(1)
+        expect{ subject }.to change{ Task.count }.by(1)
       end
       it "成功のレスポンスが帰ること" do
-        post proto_tasks_url, params: params_encoded
+        subject
         decoded_response = Protos::CreateTaskResponse.decode(response.body)
         expect(decoded_response.status.code).to eq(201)
-        expect(decoded_response.status.message).to eq('titleを作成しました。')
+        expect(decoded_response.status.message).to eq("#{params[:title]}" + 'を作成しました。')
       end
     end
 
     context "不正な入力値が送られてきた時" do
       let(:params) {{ description: 'description' }}
-      let(:params_encoded) {
-        Protos::CreateTaskRequest.encode(Protos::CreateTaskRequest.new(params))
-      }
+
       it "レコードの作成が失敗すること" do
-        expect { post proto_tasks_url, params: params_encoded }.to change{ Task.count }.by(0)
+        expect{ subject }.to change{ Task.count }.by(0)
       end
       it "失敗のレスポンスが帰ること" do
-        post proto_tasks_url, params: params_encoded
+        subject
         decoded_response = Protos::CreateTaskResponse.decode(response.body)
         expect(decoded_response.status.code).to eq(400)
         expect(decoded_response.status.message).to eq('の作成に失敗しました。')
