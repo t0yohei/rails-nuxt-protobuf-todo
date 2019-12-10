@@ -59,4 +59,27 @@ RSpec.describe "Proto::Tasks", type: :request do
       end
     end
   end
+
+  describe "POST /proto/tasks" do
+    context "正しい入力値が送られてきた時" do
+      let(:params) {　{ title: 'title', description: 'description' }　}
+      let(:params_encoded) {
+        Protos::CreateTaskRequest.encode(Protos::CreateTaskRequest.new(params))
+      }
+      it "レコードの作成が完了すること" do
+        expect { post proto_tasks_url, params: params_encoded }.to change{ Task.count }.by(1)
+      end
+      it "成功のレスポンスが帰ること" do
+        post proto_tasks_url, params: params_encoded
+        decoded_response = Protos::CreateTaskResponse.decode(response.body)
+        expect(decoded_response.status.code).to eq(201)
+        expect(decoded_response.status.message).to eq('titleを作成しました。')
+      end
+    end
+
+    context "不正な入力値が送られてきた時" do
+      it "レコードの作成が失敗して、失敗のレスポンスが帰ること" do
+      end
+    end
+  end
 end
