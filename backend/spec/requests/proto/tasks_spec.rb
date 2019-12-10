@@ -148,4 +148,27 @@ RSpec.describe "Proto::Tasks", type: :request do
       end
     end
   end
+
+  describe "DELETE /proto/task/:id" do
+    subject { delete proto_task_path(id) }
+
+    context "taskが1件存在するとき" do
+      let!(:task) { Task.create(id: 1, title: 'title', description: 'description') }
+      let(:id) { task.id }
+
+      it 'リクエストが成功すること' do
+        subject
+        expect(response.status).to eq 204
+      end
+
+      it 'taskが削除されること' do
+        expect{ subject }.to change{ Task.count }.by(-1)
+      end
+    end
+
+    context "存在しないtaskのidを指定したとき" do
+      it "404エラーのレスポンスが返却されること" do
+      end
+    end
+  end
 end
