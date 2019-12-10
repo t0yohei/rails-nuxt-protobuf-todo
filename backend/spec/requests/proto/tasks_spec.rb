@@ -95,4 +95,34 @@ RSpec.describe "Proto::Tasks", type: :request do
       end
     end
   end
+
+  describe "PATCH /proto/tasks/:id" do
+    subject { patch proto_task_path(id), params: params_encoded }
+
+    context "存在する id が指定されたとき" do
+      let!(:task) { Task.create(id: 1, title: 'title', description: 'description') }
+
+      context "正しい入力値が送られてきた時" do
+        let(:id) { task.id }
+        let(:params) {{ title: 'title_changed', description: 'description_changed' }}
+        let(:params_encoded) {
+          Protos::UpdateTaskRequest.encode(Protos::UpdateTaskRequest.new(params))
+        }
+
+        it "成功のレスポンスが帰ること" do
+          subject
+          decoded_response = Protos::UpdateTaskResponse.decode(response.body)
+          expect(decoded_response.status.code).to eq(200)
+          expect(decoded_response.status.message).to eq("#{params[:title]}" + 'を更新しました。')
+        end
+
+        it "データが更新されていること" do
+          subject
+          task.reload
+          expect(task.title).to eq(params[:title])
+          expect(task.description).to eq(params[:description])
+        end
+      end
+    end
+  end
 end
