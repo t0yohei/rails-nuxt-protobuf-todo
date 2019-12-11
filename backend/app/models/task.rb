@@ -3,7 +3,8 @@ class Task < ApplicationRecord
   validates :description, length: { maximum: 100 }
 
   def serialize
-    Protos::Task.encode(self.convert_to_message_object)
+    task_message = self.convert_to_message_object
+    Protos::Task.encode(task_message)
   end
 
   def deserialize(data)
@@ -12,19 +13,13 @@ class Task < ApplicationRecord
   end
 
   def self.serialize_all
-    tasks_message = Protos::Tasks.new(
-      tasks: Task.all.map {|task|
-        task.convert_to_message_object
-      }
-    )
+    tasks_message = convert_all_to_message_object
     Protos::Tasks.encode(tasks_message)
   end
 
   def self.deserialize_all(data)
     tasks_message = Protos::Tasks.decode(data)
-    tasks_message.tasks.map {|task_message|
-      Task.convert_from_message_object(task_message)
-    }
+    convert_all_from_message_object(tasks_message)
   end
 
   def self.convert_from_message_object(task_message)
@@ -40,6 +35,20 @@ class Task < ApplicationRecord
       :id => self.id,
       :title => self.title,
       :description => self.description
+    )
+  end
+
+  def self.convert_all_from_message_object(tasks_message)
+    tasks_message.tasks.map {|task_message|
+      Task.convert_from_message_object(task_message)
+    }
+  end
+
+  def self.convert_all_to_message_object
+    Protos::Tasks.new(
+      task: Task.all.map {|task|
+        task.convert_to_message_object
+      }
     )
   end
 end
