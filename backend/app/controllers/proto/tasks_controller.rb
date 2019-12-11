@@ -1,30 +1,14 @@
 
 class Proto::TasksController < ApplicationController
   def index
-    tasks = Task.all
-    tasks_proto = Protos::Tasks.new
-    tasks.each do |each_task|
-      task_proto = Protos::Task.new(
-        id: each_task.id,
-        title: each_task.title,
-        description: each_task.description
-      )
-      tasks_proto.task.push(task_proto)
-    end
-
-    response = Protos::FetchTasksResponse.new(tasks: tasks_proto)
+    response = Protos::FetchTasksResponse.new(tasks: Task.convert_all_to_message_object)
     response_encoded_data = Protos::FetchTasksResponse.encode(response)
     render plain: response_encoded_data, status: :ok
   end
 
   def show
     task = Task.find(params[:id])
-    task_proto = Protos::Task.new(
-      id: task.id,
-      title: task.title,
-      description: task.description
-    )
-    response = Protos::FetchTaskResponse.new(task: task_proto)
+    response = Protos::FetchTaskResponse.new(task: task.convert_to_message_object)
     response_encoded_data = Protos::FetchTaskResponse.encode(response)
     render plain: response_encoded_data, status: :ok
   end
