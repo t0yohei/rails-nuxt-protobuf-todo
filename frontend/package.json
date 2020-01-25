@@ -10,7 +10,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue .",
-    "test": "jest"
+    "test": "jest --config jest.config.js"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
@@ -38,19 +38,5 @@
     "ts-jest": "^25.0.0",
     "ts-protoc-gen": "^0.12.1-pre.a78a914",
     "vue-jest": "^3.0.5"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "ts",
-      "json",
-      "vue"
-    ],
-    "transform": {
-      ".*\\.(vue)$": "vue-jest",
-      "^.+\\.js$": "babel-jest",
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$"
   }
 }
