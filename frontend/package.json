@@ -37,7 +37,7 @@
     "jest": "^25.1.0",
     "jest-puppeteer": "^4.4.0",
     "prettier": "^1.16.4",
-    "protobufjs": "^6.8.8",
+    "protobufjs": "^6.11.3",
     "puppeteer": "^2.0.0",
     "ts-jest": "^25.0.0",
     "ts-protoc-gen": "^0.12.1-pre.a78a914",
